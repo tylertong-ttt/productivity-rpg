@@ -1,1 +1,1205 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
 
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Productivity RPG</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Background -->
+    <div id="backgroundLayer"></div>
+    <div class="background-overlay"></div>
+
+    <!-- App -->
+    <div class="min-h-screen relative z-10">
+
+        <!-- ================= HEADER ================= -->
+
+        <header class="glass-header sticky top-0 z-50">
+
+            <div class="max-w-7xl mx-auto px-4 py-3">
+
+                <div class="flex items-center justify-between gap-3">
+
+                    <!-- Logo -->
+                    <div class="flex items-center gap-3">
+
+                        <div class="logo-orb">
+                            ⚔️
+                        </div>
+
+                        <div>
+                            <h1 class="text-lg md:text-xl font-black">
+                                Productivity RPG
+                            </h1>
+
+                            <p class="text-xs text-white/50">
+                                Work • Focus • Level Up
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <!-- Top Stats -->
+
+                    <div class="hidden md:flex items-center gap-2">
+
+                        <div class="stat-pill">
+                            ❤️
+                            <span id="headerHp">100/100</span>
+                        </div>
+
+                        <div class="stat-pill">
+                            ⭐
+                            <span id="headerLevel">Lv.1</span>
+                        </div>
+
+                        <div class="stat-pill">
+                            🪙
+                            <span id="headerGold">0</span>
+                        </div>
+
+                        <div class="stat-pill">
+                            🔥
+                            <span id="headerStreak">0</span>
+                        </div>
+
+                    </div>
+
+                    <!-- Mobile menu button -->
+
+                    <button
+                        onclick="toggleMobileMenu()"
+                        class="mobile-menu-button"
+                    >
+                        ☰
+                    </button>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- ================= MAIN ================= -->
+
+        <main class="max-w-7xl mx-auto px-4 py-6">
+
+            <!-- Character Card -->
+
+            <section class="glass-card p-5 mb-6">
+
+                <div class="grid lg:grid-cols-[auto_1fr_auto] gap-5 items-center">
+
+                    <!-- Avatar -->
+
+                    <div class="flex justify-center">
+
+                        <div class="avatar-wrapper">
+
+                            <img
+                                id="avatarImage"
+                                src="https://api.dicebear.com/9.x/adventurer/svg?seed=Hero"
+                                alt="Avatar"
+                                class="avatar"
+                            >
+
+                            <button
+                                onclick="openSettings()"
+                                class="avatar-edit"
+                                title="Đổi avatar"
+                            >
+                                ✏️
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Character info -->
+
+                    <div>
+
+                        <div class="flex flex-wrap items-center gap-2">
+
+                            <h2
+                                id="characterName"
+                                class="text-2xl md:text-3xl font-black"
+                            >
+                                Hero
+                            </h2>
+
+                            <span
+                                id="levelBadge"
+                                class="rarity-badge rarity-yellow"
+                            >
+                                Lv.1
+                            </span>
+
+                        </div>
+
+                        <p class="text-white/50 mt-1">
+                            Hãy hoàn thành công việc để trở nên mạnh hơn.
+                        </p>
+
+
+                        <!-- HP -->
+
+                        <div class="mt-4">
+
+                            <div class="flex justify-between text-xs mb-1">
+
+                                <span>
+                                    ❤️ HP
+                                </span>
+
+                                <span id="hpText">
+                                    100 / 100
+                                </span>
+
+                            </div>
+
+                            <div class="progress-track">
+
+                                <div
+                                    id="hpBar"
+                                    class="progress-fill hp-fill"
+                                    style="width:100%"
+                                ></div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- EXP -->
+
+                        <div class="mt-3">
+
+                            <div class="flex justify-between text-xs mb-1">
+
+                                <span>
+                                    ⭐ EXP
+                                </span>
+
+                                <span id="expText">
+                                    0 / 100
+                                </span>
+
+                            </div>
+
+                            <div class="progress-track">
+
+                                <div
+                                    id="expBar"
+                                    class="progress-fill exp-fill"
+                                    style="width:0%"
+                                ></div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Quick stats -->
+
+                    <div class="grid grid-cols-2 gap-2">
+
+                        <div class="mini-stat">
+                            <span>🪙</span>
+                            <strong id="goldDisplay">0</strong>
+                            <small>Gold</small>
+                        </div>
+
+                        <div class="mini-stat">
+                            <span>🔥</span>
+                            <strong id="streakDisplay">0</strong>
+                            <small>Streak</small>
+                        </div>
+
+                        <div class="mini-stat">
+                            <span>📋</span>
+                            <strong id="taskCountDisplay">0</strong>
+                            <small>Tasks</small>
+                        </div>
+
+                        <div class="mini-stat">
+                            <span>🍅</span>
+                            <strong id="pomodoroCountDisplay">0</strong>
+                            <small>Focus</small>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= DAILY BUFF ================= -->
+
+            <section
+                id="dailyBuffPanel"
+                class="glass-card p-4 mb-6"
+            >
+
+                <div class="flex flex-wrap items-center justify-between gap-3">
+
+                    <div>
+
+                        <div class="flex items-center gap-2">
+
+                            <span class="text-xl">
+                                ✨
+                            </span>
+
+                            <h3 class="font-bold">
+                                Daily Buffs
+                            </h3>
+
+                        </div>
+
+                        <p class="text-xs text-white/50 mt-1">
+                            Buff đang hoạt động hôm nay
+                        </p>
+
+                    </div>
+
+                    <div
+                        id="buffList"
+                        class="flex flex-wrap gap-2"
+                    ></div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= NAVIGATION ================= -->
+
+            <nav
+                id="mainNavigation"
+                class="glass-card p-2 mb-6"
+            >
+
+                <div class="grid grid-cols-3 md:grid-cols-6 gap-2">
+
+                    <button
+                        class="nav-button active"
+                        data-tab="dashboard"
+                    >
+                        🏠
+                        <span>Tổng quan</span>
+                    </button>
+
+                    <button
+                        class="nav-button"
+                        data-tab="tasks"
+                    >
+                        📋
+                        <span>Nhiệm vụ</span>
+                    </button>
+
+                    <button
+                        class="nav-button"
+                        data-tab="focus"
+                    >
+                        🍅
+                        <span>Tập trung</span>
+                    </button>
+
+                    <button
+                        class="nav-button"
+                        data-tab="shop"
+                    >
+                        🏪
+                        <span>Cửa hàng</span>
+                    </button>
+
+                    <button
+                        class="nav-button"
+                        data-tab="inventory"
+                    >
+                        🎒
+                        <span>Kho đồ</span>
+                    </button>
+
+                    <button
+                        class="nav-button"
+                        data-tab="achievements"
+                    >
+                        🏆
+                        <span>Thành tựu</span>
+                    </button>
+
+                </div>
+
+            </nav>
+
+
+            <!-- ================================================= -->
+            <!-- DASHBOARD -->
+            <!-- ================================================= -->
+
+            <section
+                id="tab-dashboard"
+                class="tab-content active"
+            >
+
+                <div class="grid lg:grid-cols-3 gap-5">
+
+                    <!-- Today -->
+
+                    <div class="glass-card p-5 lg:col-span-2">
+
+                        <div class="flex justify-between items-center mb-4">
+
+                            <div>
+
+                                <h2 class="section-title">
+                                    📊 Hôm nay
+                                </h2>
+
+                                <p
+                                    id="todayDate"
+                                    class="text-xs text-white/40"
+                                ></p>
+
+                            </div>
+
+                            <button
+                                onclick="switchTab('tasks')"
+                                class="primary-button"
+                            >
+                                + Nhiệm vụ
+                            </button>
+
+                        </div>
+
+
+                        <div class="grid sm:grid-cols-3 gap-3">
+
+                            <div class="dashboard-stat">
+                                <span>📋</span>
+                                <strong id="dashboardTasks">0</strong>
+                                <small>Nhiệm vụ hoàn thành</small>
+                            </div>
+
+                            <div class="dashboard-stat">
+                                <span>🍅</span>
+                                <strong id="dashboardPomodoros">0</strong>
+                                <small>Pomodoro hôm nay</small>
+                            </div>
+
+                            <div class="dashboard-stat">
+                                <span>⭐</span>
+                                <strong id="dashboardExp">0</strong>
+                                <small>EXP hôm nay</small>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Survival -->
+
+                    <div class="glass-card p-5">
+
+                        <h2 class="section-title">
+                            🛡️ Sinh tồn
+                        </h2>
+
+                        <div class="space-y-3 mt-4">
+
+                            <div class="survival-row">
+                                <span>❤️ HP</span>
+                                <strong id="survivalHp">100</strong>
+                            </div>
+
+                            <div class="survival-row">
+                                <span>🔥 Streak</span>
+                                <strong id="survivalStreak">0</strong>
+                            </div>
+
+                            <div class="survival-row">
+                                <span>⚔️ Level</span>
+                                <strong id="survivalLevel">1</strong>
+                            </div>
+
+                            <div class="survival-row">
+                                <span>🪙 Gold</span>
+                                <strong id="survivalGold">0</strong>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Quick Actions -->
+
+                <div class="grid md:grid-cols-3 gap-5 mt-5">
+
+                    <button
+                        onclick="switchTab('tasks')"
+                        class="action-card"
+                    >
+                        <span>📋</span>
+                        <strong>Quản lý nhiệm vụ</strong>
+                        <small>Biến công việc thật thành EXP</small>
+                    </button>
+
+                    <button
+                        onclick="switchTab('focus')"
+                        class="action-card"
+                    >
+                        <span>🍅</span>
+                        <strong>Bắt đầu Pomodoro</strong>
+                        <small>25 phút tập trung</small>
+                    </button>
+
+                    <button
+                        onclick="switchTab('shop')"
+                        class="action-card"
+                    >
+                        <span>🏪</span>
+                        <strong>Vào cửa hàng</strong>
+                        <small>Dùng Gold để mua vật phẩm</small>
+                    </button>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================================================= -->
+            <!-- TASKS -->
+            <!-- ================================================= -->
+
+            <section
+                id="tab-tasks"
+                class="tab-content"
+            >
+
+                <div class="grid lg:grid-cols-[360px_1fr] gap-5">
+
+                    <!-- Create Task -->
+
+                    <div class="glass-card p-5 h-fit">
+
+                        <h2 class="section-title">
+                            ➕ Tạo nhiệm vụ
+                        </h2>
+
+                        <form
+                            id="taskForm"
+                            class="space-y-4 mt-5"
+                        >
+
+                            <div>
+
+                                <label>
+                                    Tên nhiệm vụ
+                                </label>
+
+                                <input
+                                    id="taskTitle"
+                                    type="text"
+                                    required
+                                    placeholder="Ví dụ: Học Toán 30 phút"
+                                    class="input"
+                                >
+
+                            </div>
+
+
+                            <div>
+
+                                <label>
+                                    Độ khó
+                                </label>
+
+                                <select
+                                    id="taskDifficulty"
+                                    class="input"
+                                >
+
+                                    <option value="easy">
+                                        🟢 Dễ — 10 EXP / 1 Gold
+                                    </option>
+
+                                    <option value="medium">
+                                        🟡 Vừa — 20 EXP / 2 Gold
+                                    </option>
+
+                                    <option value="hard">
+                                        🟠 Khó — 50 EXP / 6 Gold
+                                    </option>
+
+                                    <option value="extreme">
+                                        🔴 Cực khó — 100 EXP / 15 Gold
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+
+                            <div>
+
+                                <label>
+                                    Deadline
+                                </label>
+
+                                <input
+                                    id="taskDeadline"
+                                    type="datetime-local"
+                                    class="input"
+                                >
+
+                            </div>
+
+
+                            <label class="checkbox-row">
+
+                                <input
+                                    id="taskDaily"
+                                    type="checkbox"
+                                >
+
+                                <span>
+                                    🔄 Nhiệm vụ Daily
+                                </span>
+
+                            </label>
+
+
+                            <button
+                                type="submit"
+                                class="primary-button w-full"
+                            >
+                                ⚔️ Thêm nhiệm vụ
+                            </button>
+
+                        </form>
+
+                    </div>
+
+
+                    <!-- Task List -->
+
+                    <div class="glass-card p-5">
+
+                        <div class="flex flex-wrap justify-between gap-3 mb-5">
+
+                            <div>
+
+                                <h2 class="section-title">
+                                    📋 Danh sách nhiệm vụ
+                                </h2>
+
+                                <p class="text-xs text-white/40 mt-1">
+                                    Hoàn thành nhiệm vụ để nhận EXP và Gold.
+                                </p>
+
+                            </div>
+
+                            <div class="flex gap-2">
+
+                                <button
+                                    onclick="filterTasks('all')"
+                                    class="filter-button active"
+                                    id="filterAll"
+                                >
+                                    Tất cả
+                                </button>
+
+                                <button
+                                    onclick="filterTasks('pending')"
+                                    class="filter-button"
+                                    id="filterPending"
+                                >
+                                    Chưa làm
+                                </button>
+
+                                <button
+                                    onclick="filterTasks('completed')"
+                                    class="filter-button"
+                                    id="filterCompleted"
+                                >
+                                    Đã làm
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                        <div
+                            id="taskList"
+                            class="space-y-3"
+                        ></div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================================================= -->
+            <!-- POMODORO -->
+            <!-- ================================================= -->
+
+            <section
+                id="tab-focus"
+                class="tab-content"
+            >
+
+                <div class="max-w-3xl mx-auto">
+
+                    <div class="glass-card p-6 text-center">
+
+                        <h2 class="section-title">
+                            🍅 Focus Pomodoro
+                        </h2>
+
+                        <p class="text-white/50 text-sm mt-1">
+                            Tập trung thật sự. Nhận thưởng thật sự.
+                        </p>
+
+
+                        <!-- Mode -->
+
+                        <div class="flex justify-center flex-wrap gap-2 mt-6">
+
+                            <button
+                                onclick="setPomodoroMode('focus')"
+                                id="modeFocus"
+                                class="pomodoro-mode active"
+                            >
+                                🍅 Tập trung
+                                <small>25:00</small>
+                            </button>
+
+                            <button
+                                onclick="setPomodoroMode('short')"
+                                id="modeShort"
+                                class="pomodoro-mode"
+                            >
+                                ☕ Nghỉ ngắn
+                                <small>05:00</small>
+                            </button>
+
+                            <button
+                                onclick="setPomodoroMode('long')"
+                                id="modeLong"
+                                class="pomodoro-mode"
+                            >
+                                🌙 Nghỉ dài
+                                <small>15:00</small>
+                            </button>
+
+                        </div>
+
+
+                        <!-- Timer -->
+
+                        <div class="timer-container">
+
+                            <div
+                                id="pomodoroTimer"
+                                class="timer"
+                            >
+                                25:00
+                            </div>
+
+                            <div
+                                id="pomodoroStatus"
+                                class="text-white/50"
+                            >
+                                Sẵn sàng tập trung?
+                            </div>
+
+                        </div>
+
+
+                        <div class="flex justify-center gap-3">
+
+                            <button
+                                id="pomodoroStart"
+                                onclick="togglePomodoro()"
+                                class="primary-button px-8"
+                            >
+                                ▶ Bắt đầu
+                            </button>
+
+                            <button
+                                onclick="resetPomodoro()"
+                                class="secondary-button"
+                            >
+                                ↻ Reset
+                            </button>
+
+                        </div>
+
+
+                        <!-- Reward -->
+
+                        <div class="reward-preview mt-6">
+
+                            <div>
+                                ⭐
+                                <strong id="pomodoroExpPreview">
+                                    +10 EXP
+                                </strong>
+                            </div>
+
+                            <div>
+                                🪙
+                                <strong>
+                                    +1 Gold
+                                </strong>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================================================= -->
+            <!-- SHOP -->
+            <!-- ================================================= -->
+
+            <section
+                id="tab-shop"
+                class="tab-content"
+            >
+
+                <div class="glass-card p-5">
+
+                    <div class="flex justify-between items-center mb-5">
+
+                        <div>
+
+                            <h2 class="section-title">
+                                🏪 Chợ Cửa Hàng
+                            </h2>
+
+                            <p class="text-white/40 text-sm">
+                                Gold hiện tại:
+                                <strong
+                                    id="shopGold"
+                                    class="text-yellow-300"
+                                >
+                                    0
+                                </strong>
+                                🪙
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    <div
+                        id="shopList"
+                        class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4"
+                    ></div>
+
+
+                    <!-- Custom Rewards -->
+
+                    <div class="border-t border-white/10 mt-8 pt-6">
+
+                        <h3 class="font-bold text-lg">
+                            🎁 Custom Rewards
+                        </h3>
+
+                        <p class="text-white/40 text-sm mt-1">
+                            Đặt phần thưởng ngoài đời cho chính mình.
+                        </p>
+
+
+                        <form
+                            id="rewardForm"
+                            class="grid md:grid-cols-[1fr_150px_auto] gap-3 mt-4"
+                        >
+
+                            <input
+                                id="rewardName"
+                                class="input"
+                                required
+                                placeholder="Ví dụ: Trà sữa"
+                            >
+
+                            <input
+                                id="rewardCost"
+                                class="input"
+                                type="number"
+                                min="1"
+                                required
+                                placeholder="Gold"
+                            >
+
+                            <button class="primary-button">
+                                + Thêm
+                            </button>
+
+                        </form>
+
+
+                        <div
+                            id="customRewardList"
+                            class="grid md:grid-cols-2 gap-3 mt-4"
+                        ></div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================================================= -->
+            <!-- INVENTORY -->
+            <!-- ================================================= -->
+
+            <section
+                id="tab-inventory"
+                class="tab-content"
+            >
+
+                <div class="grid lg:grid-cols-3 gap-5">
+
+                    <!-- Inventory -->
+
+                    <div class="glass-card p-5 lg:col-span-2">
+
+                        <div class="flex justify-between items-center">
+
+                            <div>
+
+                                <h2 class="section-title">
+                                    🎒 Kho đồ
+                                </h2>
+
+                                <p class="text-white/40 text-sm">
+                                    Vật phẩm được tự động gộp stack.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div
+                            id="inventoryList"
+                            class="grid sm:grid-cols-2 md:grid-cols-3 gap-4 mt-5"
+                        ></div>
+
+                    </div>
+
+
+                    <!-- Chests -->
+
+                    <div class="glass-card p-5">
+
+                        <h2 class="section-title">
+                            🧰 Rương báu
+                        </h2>
+
+                        <div
+                            id="chestList"
+                            class="space-y-3 mt-5"
+                        ></div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================================================= -->
+            <!-- ACHIEVEMENTS -->
+            <!-- ================================================= -->
+
+            <section
+                id="tab-achievements"
+                class="tab-content"
+            >
+
+                <div class="grid lg:grid-cols-[360px_1fr] gap-5">
+
+                    <!-- Create Achievement -->
+
+                    <div class="glass-card p-5 h-fit">
+
+                        <h2 class="section-title">
+                            🏆 Ghi dấu thành tựu
+                        </h2>
+
+                        <form
+                            id="achievementForm"
+                            class="space-y-4 mt-5"
+                        >
+
+                            <input
+                                id="achievementName"
+                                class="input"
+                                required
+                                placeholder="Ví dụ: Đậu kỳ thi..."
+                            >
+
+                            <textarea
+                                id="achievementDescription"
+                                class="input min-h-[100px]"
+                                required
+                                placeholder="Mô tả thành tựu..."
+                            ></textarea>
+
+                            <input
+                                id="achievementDate"
+                                type="date"
+                                class="input"
+                            >
+
+                            <select
+                                id="achievementBadge"
+                                class="input"
+                            >
+
+                                <option>🏆</option>
+                                <option>⭐</option>
+                                <option>🔥</option>
+                                <option>🎓</option>
+                                <option>💪</option>
+                                <option>🚀</option>
+                                <option>👑</option>
+
+                            </select>
+
+                            <button class="primary-button w-full">
+                                + Lưu thành tựu
+                            </button>
+
+                        </form>
+
+                    </div>
+
+
+                    <!-- Achievement Journal -->
+
+                    <div class="glass-card p-5">
+
+                        <h2 class="section-title">
+                            📖 Nhật ký thành tựu
+                        </h2>
+
+                        <div
+                            id="achievementList"
+                            class="space-y-3 mt-5"
+                        ></div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================================================= -->
+            <!-- SETTINGS -->
+            <!-- ================================================= -->
+
+            <section class="glass-card p-5 mt-6">
+
+                <div class="flex flex-wrap items-center justify-between gap-3">
+
+                    <div>
+
+                        <h2 class="font-bold">
+                            ⚙️ Cài đặt & Backup
+                        </h2>
+
+                        <p class="text-xs text-white/40">
+                            Sao lưu toàn bộ dữ liệu Productivity RPG.
+                        </p>
+
+                    </div>
+
+                    <div class="flex flex-wrap gap-2">
+
+                        <button
+                            onclick="exportData()"
+                            class="secondary-button"
+                        >
+                            📥 Export JSON
+                        </button>
+
+                        <label class="secondary-button cursor-pointer">
+
+                            📤 Import JSON
+
+                            <input
+                                id="importFile"
+                                type="file"
+                                accept=".json"
+                                hidden
+                            >
+
+                        </label>
+
+                        <button
+                            onclick="openSettings()"
+                            class="secondary-button"
+                        >
+                            ⚙️ Nhân vật
+                        </button>
+
+                        <button
+                            onclick="resetGame()"
+                            class="danger-button"
+                        >
+                            🗑 Reset
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+
+    <!-- ================================================= -->
+    <!-- SETTINGS MODAL -->
+    <!-- ================================================= -->
+
+    <div
+        id="settingsModal"
+        class="modal hidden"
+    >
+
+        <div class="modal-box">
+
+            <div class="flex justify-between items-center">
+
+                <h2 class="text-xl font-black">
+                    ⚙️ Cá nhân hóa
+                </h2>
+
+                <button
+                    onclick="closeSettings()"
+                    class="close-button"
+                >
+                    ✕
+                </button>
+
+            </div>
+
+
+            <div class="space-y-4 mt-5">
+
+                <div>
+
+                    <label>
+                        Tên nhân vật
+                    </label>
+
+                    <input
+                        id="settingsName"
+                        class="input"
+                    >
+
+                </div>
+
+
+                <div>
+
+                    <label>
+                        Avatar URL
+                    </label>
+
+                    <input
+                        id="settingsAvatar"
+                        class="input"
+                        placeholder="https://..."
+                    >
+
+                </div>
+
+
+                <div>
+
+                    <label>
+                        Background URL
+                    </label>
+
+                    <input
+                        id="settingsBackground"
+                        class="input"
+                        placeholder="https://..."
+                    >
+
+                </div>
+
+
+                <button
+                    onclick="saveSettings()"
+                    class="primary-button w-full"
+                >
+                    💾 Lưu thay đổi
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================================================= -->
+    <!-- TOAST -->
+    <!-- ================================================= -->
+
+    <div
+        id="toastContainer"
+        class="toast-container"
+    ></div>
+
+
+    <!-- JavaScript -->
+    <script src="app.js"></script>
+
+</body>
+</html>
