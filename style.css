@@ -1,1 +1,1234 @@
+/* =========================================================
+   PRODUCTIVITY RPG
+   Glassmorphism UI
+========================================================= */
+
+:root {
+    --glass: rgba(15, 23, 42, 0.62);
+    --glass-light: rgba(255, 255, 255, 0.08);
+    --border: rgba(255, 255, 255, 0.12);
+    --text: #f8fafc;
+    --muted: rgba(255, 255, 255, 0.52);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    color: var(--text);
+    font-family:
+        Inter,
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+    background:
+        radial-gradient(
+            circle at top left,
+            #312e81 0%,
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at bottom right,
+            #0f766e 0%,
+            transparent 35%
+        ),
+        #020617;
+
+    min-height: 100vh;
+}
+
+
+/* =========================================================
+   BACKGROUND
+========================================================= */
+
+#backgroundLayer {
+    position: fixed;
+    inset: 0;
+    z-index: -3;
+
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    transition: background-image 0.5s ease;
+}
+
+.background-overlay {
+    position: fixed;
+    inset: 0;
+
+    z-index: -2;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(2, 6, 23, 0.84),
+            rgba(15, 23, 42, 0.65)
+        );
+
+    backdrop-filter: blur(8px);
+}
+
+
+/* =========================================================
+   GLASS
+========================================================= */
+
+.glass-card,
+.glass-header {
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,0.08),
+            rgba(255,255,255,0.035)
+        );
+
+    border:
+        1px solid var(--border);
+
+    box-shadow:
+        0 20px 60px rgba(0,0,0,0.25),
+        inset 0 1px 0 rgba(255,255,255,0.08);
+
+    backdrop-filter:
+        blur(20px)
+        saturate(140%);
+
+    -webkit-backdrop-filter:
+        blur(20px)
+        saturate(140%);
+
+    border-radius: 22px;
+}
+
+.glass-header {
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.logo-orb {
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 14px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(99,102,241,0.5),
+            rgba(168,85,247,0.45)
+        );
+
+    border: 1px solid rgba(255,255,255,0.15);
+
+    box-shadow:
+        0 0 25px rgba(99,102,241,0.25);
+}
+
+.stat-pill {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+
+    padding: 7px 11px;
+
+    border-radius: 999px;
+
+    background: rgba(255,255,255,0.06);
+
+    border: 1px solid rgba(255,255,255,0.1);
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   AVATAR
+========================================================= */
+
+.avatar-wrapper {
+    position: relative;
+
+    width: 125px;
+    height: 125px;
+}
+
+.avatar {
+    width: 125px;
+    height: 125px;
+
+    border-radius: 35px;
+
+    object-fit: cover;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(99,102,241,0.3),
+            rgba(168,85,247,0.25)
+        );
+
+    border: 2px solid rgba(255,255,255,0.18);
+
+    box-shadow:
+        0 20px 50px rgba(0,0,0,0.3);
+}
+
+.avatar-edit {
+    position: absolute;
+
+    bottom: -5px;
+    right: -5px;
+
+    width: 36px;
+    height: 36px;
+
+    border-radius: 50%;
+
+    border: 1px solid rgba(255,255,255,0.15);
+
+    background: rgba(15,23,42,0.9);
+
+    cursor: pointer;
+
+    transition: transform 0.2s ease;
+}
+
+.avatar-edit:hover {
+    transform: scale(1.1);
+}
+
+
+/* =========================================================
+   PROGRESS
+========================================================= */
+
+.progress-track {
+    height: 10px;
+
+    border-radius: 999px;
+
+    background: rgba(0,0,0,0.3);
+
+    overflow: hidden;
+
+    border: 1px solid rgba(255,255,255,0.05);
+}
+
+.progress-fill {
+    height: 100%;
+
+    border-radius: inherit;
+
+    transition:
+        width 0.5s ease,
+        background 0.3s ease;
+}
+
+.hp-fill {
+    background:
+        linear-gradient(
+            90deg,
+            #ef4444,
+            #f97316
+        );
+
+    box-shadow:
+        0 0 15px rgba(239,68,68,0.35);
+}
+
+.exp-fill {
+    background:
+        linear-gradient(
+            90deg,
+            #6366f1,
+            #a855f7
+        );
+
+    box-shadow:
+        0 0 15px rgba(99,102,241,0.35);
+}
+
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+button {
+    font-family: inherit;
+}
+
+.primary-button,
+.secondary-button,
+.danger-button {
+    border: none;
+
+    border-radius: 12px;
+
+    padding: 9px 14px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.15s ease,
+        opacity 0.15s ease,
+        box-shadow 0.15s ease;
+}
+
+.primary-button {
+    color: white;
+
+    background:
+        linear-gradient(
+            135deg,
+            #6366f1,
+            #8b5cf6
+        );
+
+    box-shadow:
+        0 8px 25px rgba(99,102,241,0.25);
+}
+
+.primary-button:hover,
+.secondary-button:hover,
+.danger-button:hover {
+    transform: translateY(-2px);
+}
+
+.secondary-button {
+    color: white;
+
+    background:
+        rgba(255,255,255,0.07);
+
+    border:
+        1px solid rgba(255,255,255,0.12);
+}
+
+.danger-button {
+    background:
+        rgba(239,68,68,0.15);
+
+    color:
+        #fca5a5;
+
+    border:
+        1px solid rgba(239,68,68,0.2);
+}
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+.nav-button {
+    min-height: 55px;
+
+    border: none;
+
+    border-radius: 14px;
+
+    color: rgba(255,255,255,0.55);
+
+    background: transparent;
+
+    cursor: pointer;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 3px;
+
+    font-size: 18px;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.nav-button span {
+    font-size: 11px;
+}
+
+.nav-button:hover {
+    background: rgba(255,255,255,0.06);
+    color: white;
+}
+
+.nav-button.active {
+    color: white;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(99,102,241,0.35),
+            rgba(168,85,247,0.25)
+        );
+
+    box-shadow:
+        inset 0 0 0 1px rgba(255,255,255,0.08);
+}
+
+
+/* =========================================================
+   TABS
+========================================================= */
+
+.tab-content {
+    display: none;
+
+    animation:
+        fadeIn 0.25s ease;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+
+/* =========================================================
+   TITLES
+========================================================= */
+
+.section-title {
+    font-size: 18px;
+    font-weight: 900;
+}
+
+
+/* =========================================================
+   MINI STATS
+========================================================= */
+
+.mini-stat,
+.dashboard-stat {
+    padding: 15px;
+
+    border-radius: 16px;
+
+    background:
+        rgba(255,255,255,0.045);
+
+    border:
+        1px solid rgba(255,255,255,0.08);
+}
+
+.mini-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.mini-stat span {
+    font-size: 20px;
+}
+
+.mini-stat strong {
+    font-size: 20px;
+}
+
+.mini-stat small,
+.dashboard-stat small {
+    color: var(--muted);
+    font-size: 11px;
+}
+
+.dashboard-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.dashboard-stat span {
+    font-size: 22px;
+}
+
+.dashboard-stat strong {
+    font-size: 28px;
+}
+
+
+/* =========================================================
+   SURVIVAL
+========================================================= */
+
+.survival-row {
+    display: flex;
+    justify-content: space-between;
+
+    padding: 12px;
+
+    border-radius: 12px;
+
+    background:
+        rgba(255,255,255,0.045);
+}
+
+.survival-row strong {
+    color: #c4b5fd;
+}
+
+
+/* =========================================================
+   ACTION CARDS
+========================================================= */
+
+.action-card {
+    text-align: left;
+
+    padding: 22px;
+
+    border-radius: 20px;
+
+    border:
+        1px solid rgba(255,255,255,0.1);
+
+    background:
+        rgba(255,255,255,0.055);
+
+    color: white;
+
+    cursor: pointer;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 7px;
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease;
+}
+
+.action-card:hover {
+    transform: translateY(-4px);
+
+    background:
+        rgba(255,255,255,0.09);
+}
+
+.action-card span {
+    font-size: 30px;
+}
+
+.action-card strong {
+    font-size: 17px;
+}
+
+.action-card small {
+    color: var(--muted);
+}
+
+
+/* =========================================================
+   INPUTS
+========================================================= */
+
+label {
+    display: block;
+
+    font-size: 12px;
+
+    color: rgba(255,255,255,0.55);
+
+    margin-bottom: 7px;
+}
+
+.input {
+    width: 100%;
+
+    border-radius: 12px;
+
+    padding: 11px 13px;
+
+    color: white;
+
+    background:
+        rgba(0,0,0,0.22);
+
+    border:
+        1px solid rgba(255,255,255,0.12);
+
+    outline: none;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.input:focus {
+    border-color:
+        rgba(129,140,248,0.65);
+
+    box-shadow:
+        0 0 0 3px rgba(99,102,241,0.12);
+}
+
+.input::placeholder {
+    color:
+        rgba(255,255,255,0.3);
+}
+
+select.input option {
+    background: #0f172a;
+    color: white;
+}
+
+textarea.input {
+    resize: vertical;
+}
+
+.checkbox-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    cursor: pointer;
+
+    margin: 0;
+}
+
+.checkbox-row input {
+    accent-color: #6366f1;
+}
+
+
+/* =========================================================
+   TASKS
+========================================================= */
+
+.task-card {
+    padding: 16px;
+
+    border-radius: 16px;
+
+    background:
+        rgba(255,255,255,0.045);
+
+    border:
+        1px solid rgba(255,255,255,0.08);
+
+    transition:
+        transform 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.task-card:hover {
+    transform: translateY(-2px);
+
+    border-color:
+        rgba(255,255,255,0.16);
+}
+
+.task-card.completed {
+    opacity: 0.55;
+}
+
+.task-card.overdue {
+    border-color:
+        rgba(239,68,68,0.5);
+
+    box-shadow:
+        0 0 20px rgba(239,68,68,0.08);
+}
+
+.task-title {
+    font-weight: 800;
+}
+
+.task-meta {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 7px;
+
+    margin-top: 8px;
+}
+
+.task-badge {
+    padding: 4px 8px;
+
+    border-radius: 999px;
+
+    font-size: 10px;
+
+    background:
+        rgba(255,255,255,0.07);
+
+    border:
+        1px solid rgba(255,255,255,0.08);
+}
+
+.overdue-badge {
+    color: #fecaca;
+
+    background:
+        rgba(239,68,68,0.15);
+
+    border:
+        1px solid rgba(239,68,68,0.3);
+
+    animation:
+        overdueFlash 1s infinite;
+}
+
+@keyframes overdueFlash {
+
+    0%, 100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.4;
+    }
+
+}
+
+.task-actions {
+    display: flex;
+
+    gap: 7px;
+
+    margin-top: 12px;
+}
+
+
+/* =========================================================
+   FILTER
+========================================================= */
+
+.filter-button {
+    padding: 7px 10px;
+
+    border-radius: 10px;
+
+    border:
+        1px solid rgba(255,255,255,0.08);
+
+    background:
+        rgba(255,255,255,0.04);
+
+    color:
+        rgba(255,255,255,0.55);
+
+    cursor: pointer;
+
+    font-size: 11px;
+}
+
+.filter-button.active {
+    color: white;
+
+    background:
+        rgba(99,102,241,0.25);
+}
+
+
+/* =========================================================
+   RARITY
+========================================================= */
+
+.rarity-badge {
+    padding: 4px 9px;
+
+    border-radius: 999px;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    border: 1px solid;
+}
+
+.rarity-white {
+    background: rgba(255,255,255,0.08);
+    border-color: rgba(255,255,255,0.2);
+}
+
+.rarity-green {
+    background: rgba(34,197,94,0.15);
+    border-color: rgba(34,197,94,0.3);
+}
+
+.rarity-blue {
+    background: rgba(59,130,246,0.15);
+    border-color: rgba(59,130,246,0.3);
+}
+
+.rarity-purple {
+    background: rgba(168,85,247,0.15);
+    border-color: rgba(168,85,247,0.3);
+}
+
+.rarity-yellow {
+    background: rgba(234,179,8,0.15);
+    border-color: rgba(234,179,8,0.3);
+}
+
+.rarity-red {
+    background: rgba(239,68,68,0.15);
+    border-color: rgba(239,68,68,0.3);
+
+    animation:
+        firePulse 1s infinite alternate;
+}
+
+@keyframes firePulse {
+
+    from {
+        box-shadow:
+            0 0 5px rgba(239,68,68,0.2);
+    }
+
+    to {
+        box-shadow:
+            0 0 20px rgba(239,68,68,0.65);
+    }
+
+}
+
+
+/* =========================================================
+   POMODORO
+========================================================= */
+
+.pomodoro-mode {
+    padding: 10px 14px;
+
+    border-radius: 12px;
+
+    border:
+        1px solid rgba(255,255,255,0.1);
+
+    background:
+        rgba(255,255,255,0.04);
+
+    color:
+        rgba(255,255,255,0.6);
+
+    cursor: pointer;
+}
+
+.pomodoro-mode small {
+    display: block;
+
+    margin-top: 3px;
+
+    opacity: 0.55;
+}
+
+.pomodoro-mode.active {
+    color: white;
+
+    background:
+        rgba(99,102,241,0.25);
+
+    border-color:
+        rgba(129,140,248,0.4);
+}
+
+.timer-container {
+    padding: 45px 10px;
+}
+
+.timer {
+    font-size:
+        clamp(70px, 15vw, 130px);
+
+    font-weight: 900;
+
+    letter-spacing: -5px;
+
+    font-variant-numeric:
+        tabular-nums;
+
+    text-shadow:
+        0 0 35px rgba(129,140,248,0.3);
+}
+
+.reward-preview {
+    display: flex;
+
+    justify-content: center;
+
+    gap: 30px;
+
+    color:
+        rgba(255,255,255,0.55);
+}
+
+
+/* =========================================================
+   SHOP
+========================================================= */
+
+.shop-item,
+.inventory-item {
+    padding: 17px;
+
+    border-radius: 17px;
+
+    background:
+        rgba(255,255,255,0.045);
+
+    border:
+        1px solid rgba(255,255,255,0.08);
+
+    transition:
+        transform 0.2s ease;
+}
+
+.shop-item:hover,
+.inventory-item:hover {
+    transform:
+        translateY(-3px);
+}
+
+.shop-icon,
+.inventory-icon {
+    font-size: 34px;
+}
+
+.shop-cost {
+    color:
+        #facc15;
+
+    font-weight: 900;
+}
+
+.stack-badge {
+    display: inline-flex;
+
+    align-items: center;
+
+    padding: 3px 7px;
+
+    border-radius: 999px;
+
+    font-size: 10px;
+
+    background:
+        rgba(255,255,255,0.08);
+}
+
+
+/* =========================================================
+   CHESTS
+========================================================= */
+
+.chest {
+    padding: 16px;
+
+    border-radius: 16px;
+
+    background:
+        rgba(255,255,255,0.05);
+
+    border:
+        1px solid rgba(255,255,255,0.1);
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease;
+}
+
+.chest:hover {
+    transform:
+        scale(1.02);
+}
+
+.chest.locked {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.chest-icon {
+    font-size: 38px;
+}
+
+
+/* =========================================================
+   ACHIEVEMENTS
+========================================================= */
+
+.achievement-card {
+    padding: 17px;
+
+    display: flex;
+
+    gap: 15px;
+
+    border-radius: 16px;
+
+    background:
+        rgba(255,255,255,0.045);
+
+    border:
+        1px solid rgba(255,255,255,0.08);
+}
+
+.achievement-badge {
+    width: 52px;
+    height: 52px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 15px;
+
+    background:
+        rgba(255,255,255,0.07);
+
+    font-size: 28px;
+
+    flex-shrink: 0;
+}
+
+
+/* =========================================================
+   BUFF
+========================================================= */
+
+.buff-chip {
+    display: flex;
+
+    align-items: center;
+
+    gap: 5px;
+
+    padding: 7px 10px;
+
+    border-radius: 999px;
+
+    background:
+        rgba(99,102,241,0.15);
+
+    border:
+        1px solid rgba(129,140,248,0.25);
+
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+.modal {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 100;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    background:
+        rgba(0,0,0,0.7);
+
+    backdrop-filter:
+        blur(10px);
+}
+
+.modal.hidden {
+    display: none;
+}
+
+.modal-box {
+    width: 100%;
+
+    max-width: 500px;
+
+    padding: 24px;
+
+    border-radius: 22px;
+
+    background:
+        rgba(15,23,42,0.95);
+
+    border:
+        1px solid rgba(255,255,255,0.12);
+
+    box-shadow:
+        0 30px 100px rgba(0,0,0,0.5);
+}
+
+.close-button {
+    width: 35px;
+    height: 35px;
+
+    border-radius: 10px;
+
+    border: none;
+
+    color: white;
+
+    background:
+        rgba(255,255,255,0.06);
+
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+.toast-container {
+    position: fixed;
+
+    right: 20px;
+    bottom: 20px;
+
+    z-index: 200;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+
+    max-width:
+        min(380px, calc(100vw - 40px));
+}
+
+.toast {
+    padding: 13px 15px;
+
+    border-radius: 14px;
+
+    background:
+        rgba(15,23,42,0.95);
+
+    border:
+        1px solid rgba(255,255,255,0.12);
+
+    box-shadow:
+        0 15px 50px rgba(0,0,0,0.3);
+
+    animation:
+        toastIn 0.3s ease;
+}
+
+@keyframes toastIn {
+
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+.mobile-menu-button {
+    display: none;
+
+    width: 40px;
+    height: 40px;
+
+    border-radius: 12px;
+
+    border:
+        1px solid rgba(255,255,255,0.1);
+
+    background:
+        rgba(255,255,255,0.06);
+
+    color: white;
+}
+
+@media (max-width: 768px) {
+
+    .mobile-menu-button {
+        display: flex;
+
+        align-items: center;
+        justify-content: center;
+    }
+
+    .nav-button {
+        min-height: 50px;
+    }
+
+    .nav-button span {
+        font-size: 9px;
+    }
+
+    .glass-card {
+        border-radius: 18px;
+    }
+
+    .avatar-wrapper,
+    .avatar {
+        width: 105px;
+        height: 105px;
+    }
+
+    .timer {
+        letter-spacing: -3px;
+    }
+
+}
 
